@@ -46,7 +46,9 @@ Proje, saati olmayan ve Âkif'in elle başlattığı bir scheduled task ile iler
 - **Âkif'te kalanlar (soru değil, görev):** faz/checkpoint onayı; para harcama ve ücretli plan; sağlayıcılarla yazışma, sözleşme, marka tescili, mağaza hesapları gibi yalnız onun yapabileceği işler; geri alınamaz işler (veri/dal/etiket silme, gizli anahtar). Bunlar `progress.md` → Ürün sahibi görevleri'ne yazılır; iş bunlara takılırsa bloklanmayan sonraki işe geçilir.
 
 ## Komutlar
-Henüz kod yok. Bileşenler eklendikçe buraya yazılır (`docs/architecture/01-tech-stack.md` → Komutlar).
+- Yerel ortam: `infra/README.md` (compose: db → migrate → metar-archiver).
+- Pipeline kontrolleri: `cd pipeline && uv run ruff check . && uv run ruff format --check . && uv run mypy && uv run pytest` (DB testleri `TEST_DATABASE_URL` + `dbmate` ister).
+- Diğer bileşenler eklendikçe: `docs/architecture/01-tech-stack.md` → Komutlar.
 
 ## Proje komutları (Claude Code)
 `.claude/commands/` altında: `/oturum` (başlangıç ritüeli), `/kapanis` (progress güncelleme), `/checkpoint`, `/adr`, `/story`.

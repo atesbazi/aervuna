@@ -8,10 +8,10 @@
 | Alan | Değer |
 |---|---|
 | Aktif faz | **Faz 0 — Lisans, doğrulama zemini, iskelet** |
-| Faz durumu | 🔨 Dokümantasyon repoda. Kod yok |
-| Son tamamlanan story | — |
-| Sıradaki adım | WX-010 repo yerleşimi + docker-compose → WX-011 migration → WX-017 istasyon kataloğu → WX-012 METAR arşivleyici |
-| Engeller | Sağlayıcı yazılı yanıtları yok (WX-016'yı bekletiyor; diğer işler bloklu değil) |
+| Faz durumu | 🔨 İskelet, şema, istasyon kataloğu ve METAR arşivleyici kodda; 7 günlük çalışma başlamadı |
+| Son tamamlanan story | WX-010, WX-011 (2026-11-08) |
+| Sıradaki adım | WX-013 ECMWF IFS anlık görüntü → WX-014 doğrulama raporu v0 iskeleti → WX-018 kararlılık metriği |
+| Engeller | Sağlayıcı yazılı yanıtları yok (WX-016). 7 günlük METAR/ECMWF sayacı arşivleyici sürekli çalışan bir makinede başlatılınca başlar (ÜS-007) |
 | Çalışma biçimi | Saatsiz scheduled task, Âkif elle başlatır. CI yok. Açık sorular ajan tarafından karara bağlanır |
 | Son checkpoint onayı | — |
 
@@ -28,14 +28,14 @@ Simgeler: ⏳ başlamadı · 🔨 sürüyor · 🧪 testte · ✋ checkpoint bek
 ## Story durumu (aktif faz)
 | ID | Sahip | Durum | Not |
 |---|---|---|---|
-| WX-010 | Ajan | ⏳ | |
-| WX-011 | Ajan | ⏳ | |
-| WX-012 | Ajan | ⏳ | Pilot: LTAC, LTFM, LTBJ, LTAI, EGLL, EDDF, KJFK, RJTT |
+| WX-010 | Ajan | ✅ | `infra/docker-compose.yml` (db, migrate, metar-archiver); `.gitattributes`/`.editorconfig`/`.env.example` mevcuttu. `compose config` geçerli; imajlar bu ortamda çekilemedi |
+| WX-011 | Ajan | ✅ | dbmate; `own`/`licensed`, 3 tablo; düz PG16'da up/down/up test edildi. Hypertable yolu TimescaleDB'li ortamda ilk `migrate`'te doğrulanacak |
+| WX-012 | Ajan | 🧪 | Kod + test hazır (ham METAR ayrıştırıcı, 30 istek/dk, 3 saat geri bakış, idempotent upsert, `metar coverage`). 7 gün ≥ %95 sayacı ÜS-007 ile başlar |
 | WX-013 | Ajan | ⏳ | |
 | WX-014 | Ajan | ⏳ | |
 | WX-015 | Ajan | 💤 | CI ertelendi (Âkif, 2026-11-08) |
 | WX-016 | Ajan | ⛔ | Open-Meteo ticari anahtarı bekliyor (WX-001) |
-| WX-017 | Ajan | ⏳ | |
+| WX-017 | Ajan | 🧪 | Pilot 8 + tüm METAR veren LTxx, NOAA stations cache'ten. Canlı yanıtla ilk senkron bekliyor (alan adları `VERIFY`) |
 | WX-018 | Ajan | ⏳ | |
 | WX-019 | Ajan | ⏳ | Yöntem C kararı verildi; rapor v0'da bölüm |
 
@@ -49,6 +49,8 @@ Simgeler: ⏳ başlamadı · 🔨 sürüyor · 🧪 testte · ✋ checkpoint bek
 | WX-003 | WeatherKit'i Türkiye'de test etmek (yalnız gösterim rolü) | Apple geliştirici hesabı | ⏳ |
 | WX-005 | Mac edinme (Faz 2) | Para | ⏳ |
 | WX-006 | Bağımsız rakip ölçümü için teklif (ForecastWatch tipi), Faz 2 öncesi | Para + sözleşme | ⏳ |
+| ÜS-007 | METAR arşivleyiciyi sürekli açık bir makinede başlatmak: `infra/README.md` komutları (db → migrate → metar-archiver). 7 günlük WX-012/WX-013 sayacı bununla başlar; ilk `migrate` çıktısında WARNING olmamalı (TimescaleDB). Zamanlanmış oturumların kalıcı sunucusu yok | Makine/sunucu (Faz 0 maliyeti "Yerel") | ⏳ |
+| ÜS-008 | (İsteğe bağlı) Claude ayarları → Capabilities'te `aviationweather.gov`, `data.ecmwf.int`, `registry-1.docker.io`, `ghcr.io` alanlarına izin: oturumlar canlı yanıtla doğrulama ve compose imajlarını deneyebilir. Bu oturumda üçü de proxy tarafından reddedildi | Hesap ayarı | ⏳ |
 | — | Faz checkpoint onayları ("Faz N onaylandı") | Faz kapısı | — |
 
 WX-004 (CAMS kapsamı) ajana devredildi: kamuya açık dokümantasyondan kontrol edilir.
@@ -56,6 +58,14 @@ WX-004 (CAMS kapsamı) ajana devredildi: kamuya açık dokümantasyondan kontrol
 ## Kararlar
 | Tarih | Karar | Gerekçe | Kaynak |
 |---|---|---|---|
+| 2026-11-08 | Migration aracı **dbmate** (düz SQL, `-- migrate:up/down`, compose'da `migrate` servisi, imaj etiketi sabit) | Dilden bağımsız tek ikili; Faz 0'da Rust araç zinciri gerektirmez (sqlx-cli gerektirirdi); API ve pipeline aynı dosyaları kullanır; testler de aynı araçla taze DB'ye uygular | WX-011, `db/README.md` |
+| 2026-11-08 | Hypertable oluşturma TimescaleDB varsa yapılır; eklentisiz düz Postgres'te tablolar düz kalır ve migration WARNING verir | Compose her zaman TimescaleDB sağlar; düz Postgres'li test/geliştirme ortamında şema yine uygulanabilir. Risk (üretimde sessizce düz tablo) WARNING + TimescaleDB varken hypertable'ı doğrulayan test + ÜS-007 kontrolüyle kapatılır. Varsayım: kolay geri alınır (koşul kaldırılır) | `db/migrations/20261108000001_initial_schema.sql` |
+| 2026-11-08 | Gözlem değerleri API'nin türetilmiş JSON alanlarından değil, ham METAR'ın kendi ayrıştırıcımızla okunmasından gelir; trend (NOSIG/TEMPO/BECMG) ve RExx gözleme sayılmaz; ABD RMK T-grubu varsa sıcaklık/çiy onda bir hassasiyetle | Doğrulama verisinin kaynağı denetlenebilir olmalı (doğruluk önceliği); JSON alan anlamları bu ortamdan canlı doğrulanamadı | `pipeline/.../metar/parse.py` |
+| 2026-11-08 | METAR çekimi: 50 istasyonluk toplu istek, 30 istek/dk (sınırın %30'u), her çalışmada son 3 saat, `(icao, observed_at)` upsert; COR aynı zamanı değiştirir | Kaçan çalışmalar sonraki çalışmada kendiliğinden doldurulur (≥ %95 hedefi), sağlayıcı sınırına geniş pay | WX-012 |
+| 2026-11-08 | WX-012 doluluk ölçüsü **saatlik**: istasyon bir UTC saatinde ≥ 1 rapor varsa o saat tam; oran = dolu saat / beklenen saat | Kadanstan bağımsız (LTxx/EGLL/RJTT 30 dk, KJFK 60 dk); doğrulama eşleştirmesinin ±30 dk penceresiyle uyumlu | `pipeline/.../metar/coverage.py` |
+| 2026-11-08 | Pilot 8'e ek olarak METAR veren tüm LTxx istasyonları ilk günden aktif | Arşiv geriye doldurulamaz (API yalnız 30 gün); maliyet 10 dk'da ~2 istek; plan "Faz 0 sonunda tüm aktif LTxx" diyor | WX-017 |
+| 2026-11-08 | İstasyon senkronu koordinat/ad/rakımı günceller, `active`'e dokunmaz; eksik pilot istasyon hata | Operatörün kapattığı istasyon geri açılmaz; koordinatlar elle yazılmaz, kaynaktan gelir | WX-017 |
+| 2026-11-08 | Varsayılan User-Agent `aervuna-pipeline/<sürüm> (+https://github.com/atesbazi/aervuna)`; e-posta yok | NOAA özel UA istiyor; repo bağlantısı iletişim için yeterli, kişisel veri yayımlanmaz | `pipeline/README.md` |
 | 2026-11-08 | Açık sorular Âkif'e sorulmaz; ajan en mantıklı/performanslı/stabil/doğru yolu seçer ve buraya yazar. Âkif'te kalan: faz onayı, para, yazışma/sözleşme/marka, geri alınamaz işler | Âkif | `CLAUDE.md` → Açık sorular ve kararlar |
 | 2026-11-08 | Tomorrow.io ve Rainbow.ai yazışması Faz 4'e ertelendi | Yalnız nowcasting için gerekli; Faz 0–3 kapsamını etkilemiyor; ikisi de e-posta yayınlamıyor (yalnız web formu) | IDEA-001 |
 | 2026-11-08 | Sağlayıcı e-postaları hazırlandı; Open-Meteo ve Meteoblue öncelikli, MGM Türkçe | WX-001'i Âkif için gönderilmeye hazır hale getirmek | `research/provider-outreach.md` |
@@ -76,6 +86,14 @@ WX-004 (CAMS kapsamı) ajana devredildi: kamuya açık dokümantasyondan kontrol
 | 2026-11-08 | Faz 0 doğrulama arşivi ECMWF açık verisiyle başlar | Open-Meteo ücretsiz API ticari olmayan kullanım içindir | `plan.md` Faz 0 |
 
 ## Son oturum
+### 2026-11-08 (2) — Faz 0 iskelet, şema, istasyon kataloğu, METAR arşivleyici
+- **Plan:** (1) WX-010 compose. (2) WX-011 migration aracı + ilk şema. (3) WX-017 istasyon kataloğu. (4) WX-012 METAR arşivleyici + doluluk ölçümü. (5) progress güncellemesi.
+- **Yapılan:** Plan tamamlandı. `infra/docker-compose.yml` (TimescaleDB 2.17.2-pg16, dbmate 2.37.0, `metar-archiver`), `db/migrations/20261108000001_initial_schema.sql`, `pipeline/` (uv, httpx, psycopg 3; `stations sync`, `metar once|run|coverage`, Dockerfile).
+- **Yerel kontroller:** `ruff check` ✅, `ruff format --check` ✅, `mypy --strict` ✅ (18 dosya), `pytest` 37 geçti / 1 atlandı (hypertable testi: bu ortamda TimescaleDB yok). DB testleri düz PostgreSQL 16 + dbmate ile koştu.
+- **Bu ortamda doğrulanamayanlar:** aviationweather.gov, data.ecmwf.int, Docker Hub ve ghcr.io'ya çıkış proxy tarafından reddedildi (ÜS-008). Bu yüzden canlı NOAA yanıtı (alan adları `VERIFY` notlu), compose imajlarının çekilmesi, pipeline imaj derlemesi ve TimescaleDB hypertable yolu ilk kez ÜS-007 çalıştırmasında doğrulanacak. Testlerdeki METAR'lar format-sadık örnekler, canlı kayıt değil.
+- **Sıradaki:** (1) WX-013 ECMWF IFS açık veri anlık görüntüsü (00/12 UTC, istasyon noktası, 0–240 sa, CC-BY atfı). (2) WX-014 doğrulama raporu v0 kodu (MAE/bias, ufuk kovaları, n < 100 gizleme) + WX-018 kararlılık metriği. (3) WX-004 CAMS kapsamı (doküman taraması).
+- **Verilen kararlar:** Kararlar tablosundaki ilk sekiz 2026-11-08 satırı (dbmate, koşullu hypertable, ham METAR ayrıştırma, çekim politikası, saatlik doluluk, tüm LTxx aktif, senkron kuralları, User-Agent).
+
 ### 2026-11-08 — Ad değişikliği, yaşam tarzı katmanı, karar yetkisi
 - **Yapılan:** Ad Aervuna'ya çevrildi. Yaşam tarzı katmanı tasarlandı (`product/05-lifestyle.md`, ADR-0010) ve Faz 1–4'e story'leriyle dağıtıldı. "Açık soruları sorma, en doğru yolu seç" kuralı CLAUDE.md/AGENTS.md ve komutlara işlendi; Q4 (rakip kıyası) ve gelir modeli varsayımı karara bağlandı.
 - **Sıradaki:** (1) WX-010 repo yerleşimi + `infra/docker-compose.yml`. (2) WX-011 migration aracı + ilk şema. (3) WX-017 istasyon kataloğu, ardından WX-012.
@@ -84,6 +102,10 @@ WX-004 (CAMS kapsamı) ajana devredildi: kamuya açık dokümantasyondan kontrol
 ## Story metrikleri
 | ID | Testler ilk denemede yeşil | Düzeltme turu | ADR/kapsam ihlali | Not |
 |---|---|---|---|---|
+| WX-010 | — (yapılandırma) | 0 | Yok | `compose config` geçerli |
+| WX-011 | Evet | 0 | Yok | up/down/up |
+| WX-017 | Evet | 0 | Yok | |
+| WX-012 | Evet | 1 (ruff S105 yanlış pozitif → değişken adı) | Yok | |
 
 ## Checkpoint raporları
 (Faz sonunda `templates/checkpoint.md` formatında buraya eklenir.)
