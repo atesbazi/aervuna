@@ -10,7 +10,7 @@
 | Önbellek | Süreç içi (`moka`); çoklu örnekte gerekirse Redis (ADR) | — | 0005 |
 | Veri hattı | Python 3.12+, `uv`, `ecmwf-opendata`, `cfgrib`/`eccodes`, `xarray`, `pandas`/`polars`, `httpx`, `ruff`, `pytest`, `mypy` | `pyproject.toml` + `uv.lock` | 0006 |
 | Veritabanı | PostgreSQL 16 + TimescaleDB | docker imajı etiketle sabit | 0007 |
-| Migration | Faz 0'da seçilir (aday: `sqlx-cli`, `dbmate`) | — | 0007 |
+| Migration | `dbmate` (düz SQL, up/down; compose'da `migrate` servisi) | Compose imaj etiketi sabit | 0007 |
 | Yerel ortam | Windows + WSL2 Ubuntu, Docker | — | — |
 | CI | Şimdilik yok (Âkif, 2026-11-08); yerel komutlar | — | — |
 
@@ -22,10 +22,11 @@
 ## Komutlar
 Faz 0'da kod geldikçe doldurulur:
 ```
-# yerel ortam
-docker compose -f infra/docker-compose.yml up -d
+# yerel ortam (ayrıntı infra/README.md)
+docker compose -f infra/docker-compose.yml --env-file .env up -d db
+docker compose -f infra/docker-compose.yml --env-file .env run --rm migrate
 # pipeline
-cd pipeline && uv sync && uv run pytest && uv run ruff check .
+cd pipeline && uv sync && uv run ruff check . && uv run ruff format --check . && uv run mypy && uv run pytest
 # api (Faz 1)
 cd services/api && cargo test && cargo clippy -- -D warnings
 # mobil (Faz 1)
