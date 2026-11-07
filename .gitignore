@@ -1,0 +1,45 @@
+# env / secrets
+.env
+.env.*
+!.env.example
+*.jks
+*.keystore
+key.properties
+*.p8
+*.p12
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.iml
+
+# Rust
+target/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+
+# Flutter / Dart
+.dart_tool/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+**/android/.gradle/
+**/android/local.properties
+**/ios/Pods/
+
+# data
+data/
+*.grib
+*.grib2
+*.nc
+
+# Claude Code local settings
+.claude/settings.local.json
