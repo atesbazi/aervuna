@@ -5,7 +5,7 @@
 ## Yerel kontrol komutları (CI yerine)
 | Bileşen | Komut |
 |---|---|
-| pipeline | `cd pipeline && uv run ruff check . && uv run ruff format --check . && uv run mypy . && uv run pytest` |
+| pipeline | `cd pipeline && uv run ruff check . && uv run ruff format --check . && uv run mypy && uv run pytest` |
 | api (Faz 1) | `cd services/api && cargo fmt --check && cargo clippy -- -D warnings && cargo test` |
 | mobile (Faz 1) | `cd apps/mobile && flutter analyze && flutter test` |
 
