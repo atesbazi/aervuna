@@ -44,8 +44,8 @@ Simgeler: ⏳ başlamadı · 🔨 sürüyor · 🧪 testte · ✋ checkpoint bek
 
 | ID | Görev | Neden Âkif | Durum |
 |---|---|---|---|
-| WX-001 | Sağlayıcılara ortak soru setini göndermek (Open-Meteo, Meteoblue, Tomorrow.io, Rainbow.ai, MGM); yanıtları `research/provider-responses.md` şablonuyla iletmek | Yazışma ve sözleşme | ⏳ |
-| WX-002 | "Aervuna" için TÜRKPATENT, EUIPO, Play, App Store araması | Marka | ⏳ |
+| WX-001 | Hazır e-postaları göndermek: `research/provider-outreach.md` (Open-Meteo, Meteoblue, Tomorrow.io, Rainbow.ai, MGM); gelen yanıtları iletmek | Yazışma ve sözleşme | ⏳ Metinler hazır |
+| WX-002 | "Aervuna" için TÜRKPATENT, EUIPO, Play, App Store araması | Marka | ✅ 2026-11-08: çakışma yok, ad tekil |
 | WX-003 | WeatherKit'i Türkiye'de test etmek (yalnız gösterim rolü) | Apple geliştirici hesabı | ⏳ |
 | WX-005 | Mac edinme (Faz 2) | Para | ⏳ |
 | WX-006 | Bağımsız rakip ölçümü için teklif (ForecastWatch tipi), Faz 2 öncesi | Para + sözleşme | ⏳ |
@@ -57,7 +57,8 @@ WX-004 (CAMS kapsamı) ajana devredildi: kamuya açık dokümantasyondan kontrol
 | Tarih | Karar | Gerekçe | Kaynak |
 |---|---|---|---|
 | 2026-11-08 | Açık sorular Âkif'e sorulmaz; ajan en mantıklı/performanslı/stabil/doğru yolu seçer ve buraya yazar. Âkif'te kalan: faz onayı, para, yazışma/sözleşme/marka, geri alınamaz işler | Âkif | `CLAUDE.md` → Açık sorular ve kararlar |
-| 2026-11-08 | Uygulama adı **Aervuna**, repo `atesbazi/aervuna` (eski: Ufuk) | Âkif | — |
+| 2026-11-08 | Sağlayıcı e-postaları hazırlandı; Open-Meteo ve Meteoblue öncelikli, MGM Türkçe | WX-001'i Âkif için gönderilmeye hazır hale getirmek | `research/provider-outreach.md` |
+| 2026-11-08 | Uygulama adı **Aervuna**, repo `atesbazi/aervuna` (eski: Ufuk); marka araması temiz (WX-002) | Âkif | — |
 | 2026-11-08 | Yaşam tarzı ikinci değer ayağı; her fazda planlı: F1 v0, F2 v1 + bildirim + kişiselleştirme, F3 güven farkındalıklı + isabet raporu, F4 AQI/polen/UV/seyahat/bahçe | Âkif'in beklentisi; öneri ancak tahmin kadar iyi olduğu için doğruluğa bağlı | `product/05-lifestyle.md`, ADR-0010 |
 | 2026-11-08 | Yaşam tarzı motoru Rust domain'de, deterministik, sürümlü, `why` gerekçeli; kişiselleştirme cihazda | Tek mantık her yüzeyde, test edilebilir, lisans dostu, hesap gerektirmez | ADR-0010 |
 | 2026-11-08 | Rakip kıyası: Faz 0–1 dolaylı yöntem (C), Faz 2 öncesi bağımsız üçüncü taraf (A); kazıma ve panel yok | En savunulabilir iddia + bugün sıfır maliyet ve hukuki risk | `research/competitor-benchmark.md` |

@@ -26,7 +26,7 @@ Bu klasör projenin **tek doğruluk kaynağıdır**. Kod ajanı (Claude Code) ba
 docs/
 ├── README.md · AGENTS.md · plan.md · progress.md · backlog.md · risks.md · glossary.md
 ├── adr/            0000-template + 0001…0010
-├── research/       2026-11-07-data-provider-decision.md · license-notes.md · competitor-benchmark.md · ai-reviews.md · provider-responses.md
+├── research/       2026-11-07-data-provider-decision.md · license-notes.md · competitor-benchmark.md · ai-reviews.md · provider-outreach.md · provider-responses.md
 ├── architecture/   01-tech-stack · 02-system-architecture · 03-data-model · 04-api-contracts · 05-forecast-verification · 06-security-privacy
 ├── product/        01-vision · 02-features · 03-monetization · 04-competitors · 05-lifestyle
 ├── design/         01-visual-direction
