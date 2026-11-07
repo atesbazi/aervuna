@@ -44,7 +44,7 @@ Simgeler: ⏳ başlamadı · 🔨 sürüyor · 🧪 testte · ✋ checkpoint bek
 
 | ID | Görev | Neden Âkif | Durum |
 |---|---|---|---|
-| WX-001 | Hazır e-postaları göndermek: `research/provider-outreach.md` (Open-Meteo, Meteoblue, Tomorrow.io, Rainbow.ai, MGM); gelen yanıtları iletmek | Yazışma ve sözleşme | ⏳ Metinler hazır |
+| WX-001 | Sağlayıcı yazışmaları. Open-Meteo, Meteoblue, MGM'ye 2026-11-08'de Gmail'den gönderildi; yanıtlar günlük takip görevince işlenir. **Kalan:** Tomorrow.io ve Rainbow.ai web formları (`research/provider-outreach.md` §3–4) | Yazışma ve sözleşme | 🔨 3/5 gönderildi |
 | WX-002 | "Aervuna" için TÜRKPATENT, EUIPO, Play, App Store araması | Marka | ✅ 2026-11-08: çakışma yok, ad tekil |
 | WX-003 | WeatherKit'i Türkiye'de test etmek (yalnız gösterim rolü) | Apple geliştirici hesabı | ⏳ |
 | WX-005 | Mac edinme (Faz 2) | Para | ⏳ |

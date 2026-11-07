@@ -7,11 +7,11 @@
 ## Gönderim listesi
 | Sağlayıcı | Kanal | Dil | Öncelik |
 |---|---|---|---|
-| Open-Meteo | info@open-meteo.com ([pricing sayfası](https://open-meteo.com/en/pricing)) | EN | 1 — ana kaynak |
-| Meteoblue | business.meteoblue.com iletişim formu / satış | EN | 1 — kıyas |
-| Tomorrow.io | tomorrow.io satış iletişim formu | EN | 2 — nowcasting |
-| Rainbow.ai | rainbow.ai/business iletişim formu | EN | 2 — nowcasting |
-| MGM | mgm.gov.tr iletişim / MEVBİS veri satış birimi | TR | 3 — Türkiye istasyon verisi |
+| Open-Meteo | info@open-meteo.com — **gönderildi 2026-11-08** | EN | 1 — ana kaynak |
+| Meteoblue | support@meteoblue.com ([iletişim sayfası](https://content.meteoblue.com/en/about-us/contact)) — **gönderildi 2026-11-08** | EN | 1 — kıyas |
+| Tomorrow.io | tomorrow.io satış iletişim formu (e-posta bulunamadı) — Âkif | EN | 2 — nowcasting |
+| Rainbow.ai | rainbow.ai/business iletişim formu (e-posta bulunamadı) — Âkif | EN | 2 — nowcasting |
+| MGM | pazarlama@mgm.gov.tr ([ürünler sayfası](https://mgm.gov.tr/site/urunler.aspx?u=tum)) — **gönderildi 2026-11-08** | TR | 3 — Türkiye istasyon verisi |
 
 İletişim formunda karakter sınırı varsa metnin "Questions" bölümü korunur, giriş kısaltılır.
 
