@@ -1,0 +1,58 @@
+# Aervuna local environment (WX-010).
+# Usage (from repo root):
+#   cp .env.example .env            # then set POSTGRES_PASSWORD
+#   docker compose -f infra/docker-compose.yml --env-file .env up -d db
+#   docker compose -f infra/docker-compose.yml --env-file .env run --rm migrate
+#   docker compose -f infra/docker-compose.yml --env-file .env up -d metar-archiver
+name: aervuna
+
+services:
+  db:
+    # PostgreSQL 16 + TimescaleDB (ADR-0007). Tag pinned; bump deliberately.
+    image: timescale/timescaledb:2.17.2-pg16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-wx}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+      POSTGRES_DB: ${POSTGRES_DB:-wx}
+      TIMESCALEDB_TELEMETRY: "off"
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-wx} -d ${POSTGRES_DB:-wx}"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  migrate:
+    # dbmate applies db/migrations (single source for API and pipeline).
+    image: ghcr.io/amacneil/dbmate:2.37.0
+    profiles: ["tools"]
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER:-wx}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-wx}?sslmode=disable
+      DBMATE_MIGRATIONS_DIR: /db/migrations
+      DBMATE_NO_DUMP_SCHEMA: "true"
+    volumes:
+      - ../db:/db:ro
+    command: ["--wait", "up"]
+
+  metar-archiver:
+    # WX-012: syncs the station catalog, then archives METARs every 10 minutes.
+    build:
+      context: ../pipeline
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER:-wx}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-wx}
+      METAR_USER_AGENT: ${METAR_USER_AGENT:-}
+    command: ["metar", "run"]
+
+volumes:
+  pgdata:
