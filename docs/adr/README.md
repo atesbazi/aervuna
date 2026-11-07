@@ -11,5 +11,6 @@
 | [0007](0007-postgres-timescale-licensed-own-split.md) | PostgreSQL + TimescaleDB, lisanslı/kendi veri ayrımı | Accepted |
 | [0008](0008-android-first.md) | Önce Android, iOS Faz 2 | Accepted |
 | [0009](0009-calibrated-confidence-score.md) | Güven skoru kalibre olasılıktır | Accepted |
+| [0010](0010-lifestyle-engine.md) | Yaşam tarzı motoru: deterministik, açıklanabilir, sunucuda | Accepted |
 
-Yeni ADR: `0000-template.md`'yi kopyala, sıradaki numarayı ver, `Durum: Proposed` ile başla, ürün sahibinin onayıyla `Accepted` yap ve bu tabloya ekle.
+Yeni ADR: `0000-template.md`'yi kopyala, sıradaki numarayı ver. Ajan en doğru seçeneği seçer, `Accepted` yapar ("Claude, Âkif'in yetki devriyle") ve bu tabloya ekler (Âkif, 2026-11-08). Mevcut ADR düzenlenmez; yerine geçen yeni ADR yazılır.

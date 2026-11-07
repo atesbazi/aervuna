@@ -35,4 +35,4 @@ Türkiye: LTAC (Ankara Esenboğa), LTFM (İstanbul), LTBJ (İzmir), LTAI (Antaly
 - WeatherKit lisans gereği bu sürece dahil edilmez (ADR-0003).
 
 ## Rakip kıyası
-Ürünün pazarlama iddiası "mağaza ve gömülü uygulamalardan daha tutarlı ve doğru" olduğu için rakip kıyası zorunludur. Yöntem lisans ve hukuk açısından hassastır: `research/competitor-benchmark.md`, karar Q4. Karar alınmadan rakip verisi toplanmaz.
+Ürünün pazarlama iddiası "mağaza ve gömülü uygulamalardan daha tutarlı ve doğru" olduğu için rakip kıyası zorunludur. Yöntem lisans ve hukuk açısından hassastır: `research/competitor-benchmark.md`, karar: Faz 0–1 dolaylı kıyas (C), Faz 2 öncesi bağımsız üçüncü taraf (A). Rakip verisi toplanmaz.

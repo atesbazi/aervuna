@@ -2,7 +2,7 @@
 
 | Katman | Araç | Kapsam |
 |---|---|---|
-| Rust domain | `cargo test` | Endeks formülleri, grid indirgeme, birim dönüşümleri (özellik tabanlı test: `proptest`) |
+| Rust domain | `cargo test` | Yaşam tarzı kuralları (test vektörleri `product/05-lifestyle.md`), endeks formülleri, grid indirgeme, birim dönüşümleri (özellik tabanlı test: `proptest`) |
 | Rust adaptör | `wiremock` | Sağlayıcı sözleşme testleri, zaman aşımı, yeniden deneme, bayat veri |
 | Lisans kuralları | `cargo test` | `archive_allowed=false` adaptörün verisi `VerificationSink`'e ulaşmaz; TTL lisansı aşmaz |
 | DB | testcontainers / docker | Migration'lar, hypertable, roller |

@@ -10,6 +10,11 @@
 2. Ücretsiz + reklam (görsel deneyimle çelişir; önerilmez).
 3. Tek seferlik "pro" satın alma.
 
-## Açık sorular
+## Karar (varsayım; Faz 2'de ADR ile kesinleşir — Claude, Âkif'in yetki devriyle, 2026-11-08)
+- **Ücretsiz + Plus abonelik, reklamsız.** Reklam sinematik ve şık deneyimle çelişir; Plus yalnız kendi ürettiğimiz değeri satar (gelişmiş yaşam tarzı önerileri, kişiselleştirme, gelişmiş widget/tema, güven ayrıntıları).
+- **IAP altyapısı: RevenueCat** (Pagora'daki deneyimle tutarlı; iOS + Android tek API).
+- Fiyat seviyesi Faz 2'de bölge bazlı mağaza fiyatlandırmasıyla belirlenir.
+
+## Eski açık sorular (kapandı)
 - Türkiye fiyat seviyesi; yıllık deneme.
 - IAP altyapısı (RevenueCat vb.) — ADR gerekir.

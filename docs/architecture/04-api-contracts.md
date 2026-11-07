@@ -3,7 +3,7 @@
 Genel: `https://api.<alan>/v1`, JSON, UTF-8, zamanlar ISO 8601 UTC + `timezone` alanı. Hata: `application/problem+json` (`type`, `title`, `status`, `code`, `retryable`, `requestId`).
 
 ## `GET /v1/forecast`
-Sorgu: `lat`, `lon` (zorunlu), `lang` (`en` varsayılan \| `tr`), `units` (`metric` varsayılan \| `imperial`).
+Sorgu: `lat`, `lon` (zorunlu), `thermalBias` (−2…+2, varsayılan 0; cihazdaki kişiselleştirme, sunucuda saklanmaz), `lang` (`en` varsayılan \| `tr`), `units` (`metric` varsayılan \| `imperial`).
 
 ```json
 {
@@ -16,15 +16,19 @@ Sorgu: `lat`, `lon` (zorunlu), `lang` (`en` varsayılan \| `tr`), `units` (`metr
   "hourly": [ { "time": "…", "temp": 14.0, "feelsLike": 12.5, "precipProb": 20, "precip": 0.0, "windSpeed": 17, "condition": "cloudy" } ],
   "daily":  [ { "date": "2026-11-08", "tempMin": 8.1, "tempMax": 16.4, "precipProb": 30, "precipSum": 0.4, "sunrise": "…", "sunset": "…", "condition": "showers" } ],
   "lifestyle": {
-    "comfort": { "score": 72, "label": "comfortable" },
-    "outfit":  { "layers": 2, "items": ["light_jacket"], "umbrella": false },
-    "bestRun": { "from": "…", "to": "…", "reason": "low_wind_mild_temp" }
+    "rulesVersion": "1.0.0",
+    "summary": { "code": "rain_after", "params": { "time": "14:00", "item": "jacket" } },
+    "comfort": { "score": 72, "label": "comfortable", "why": ["mild_feels_like", "light_wind"] },
+    "outfit":  { "layers": 2, "items": ["light_jacket"], "umbrella": false, "why": ["feels_like_12", "wind_18"] },
+    "bestRun": { "from": "…", "to": "…", "why": ["low_wind", "mild_temp", "dry"] },
+    "confidence": null
   },
   "confidence": null
 }
 ```
 - `condition`: kapalı sözlük (`clear`, `partly_cloudy`, `cloudy`, `fog`, `drizzle`, `rain`, `showers`, `snow`, `sleet`, `thunderstorm`); görsel katmanın girdisi.
 - `confidence`: Faz 3'e kadar `null` (ADR-0009).
+- `lifestyle`: ADR-0010. Metinler istemcide `code` + `params` ile i18n şablonlarından üretilir; sunucu dil bağımsız kod döner.
 - Ham koordinat yanıtta yer almaz.
 
 ## `GET /v1/places/search?q=`

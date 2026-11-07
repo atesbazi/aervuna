@@ -8,7 +8,7 @@
                                  │ HTTPS /v1/forecast?lat&lon                 │ JSON anlık görüntü
                                  ▼                                            │ (uygulama yazar)
 ┌──────────────────────────────── API (Rust / Axum) ─────────────────────────────────────────┐
-│ adapters/http ─▶ application ─▶ domain (endeksler, grid, birimler)                          │
+│ adapters/http ─▶ application ─▶ domain (yaşam tarzı motoru ADR-0010, grid, birimler)         │
 │                    │ ports: ForecastProvider · ForecastCache · VerificationSink              │
 │                    ▼                                                                         │
 │ adapters/providers: open_meteo (archive=yes) · meteoblue (yanıta göre) · weatherkit (yok)   │

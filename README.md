@@ -1,4 +1,4 @@
-# Ufuk
+# Aervuna
 
 Global hava durumu uygulaması. Kalbi doğruluk: mağaza ve cihazlara gömülü hava uygulamalarından daha tutarlı ve daha doğru tahmin, ölçülerek kanıtlanır. Şık, gerektiğinde sinematik. Önce Android (Flutter), sonra iOS.
 

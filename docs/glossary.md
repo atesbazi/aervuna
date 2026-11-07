@@ -19,7 +19,11 @@
 | Kalibrasyon | `calibration` | "%70" denen olayların gerçekten ~%70 oranında gerçekleşmesi |
 | Bias düzeltme | `bias_correction` | Geçmiş hatadan öğrenilen sistematik sapmanın tahminden çıkarılması |
 | Güven skoru | `confidence` | Tahminin tutma olasılığı; geçmiş doğrulamadan kalibre edilir (ADR-0009) |
-| Yaşam tarzı endeksi | `lifestyle_index` | Konfor, kıyafet, koşu gibi kendi ürettiğimiz öneriler |
+| Yaşam tarzı önerisi | `lifestyle` | Tahmini kullanıcının kararına çeviren, kendi ürettiğimiz öneri (kıyafet, şemsiye, koşu saati…) |
+| Öneri gerekçesi | `why` | Öneriyi tetikleyen girdi ve eşik kodları |
+| Kural sürümü | `rulesVersion` | Yaşam tarzı motorunun sürüm numarası |
+| Üşüme ayarı | `thermal_bias` | Kullanıcının kişisel sıcaklık hassasiyeti (−2…+2), cihazda |
+| Öneri isabeti | — | Önerinin gerçekleşen havayla tutarlılığı (ör. şemsiye POD/FAR) |
 | Katma değerli ürün | value-added | Ham sağlayıcı verisinden geri çıkarılamayacak biçimde dönüştürülmüş çıktı |
 | Lisanslı şema | `licensed` | Üçüncü taraf verisinin tutulduğu şema (yalnız izinli olanlar) |
 | Kendi şemamız | `own` | Gözlem, kendi türev verimiz ve doğrulama sonuçları |

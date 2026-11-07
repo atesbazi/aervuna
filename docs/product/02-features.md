@@ -12,14 +12,9 @@
 | Hava kalitesi, polen | 4 | CAMS |
 
 ## B. Yaşam tarzı zekâsı (kendi algoritmamız)
-| Endeks | Faz | Girdiler | Çıktı |
-|---|---|---|---|
-| Konfor endeksi | 1 | hissedilen, nem, rüzgâr, yağış olasılığı, UV | 0–100 + etiket |
-| Kıyafet önerisi | 1 | hissedilen, rüzgâr, yağış, gün içi aralık | katman sayısı, parçalar, şemsiye |
-| Koşu için en iyi saat | 1 | 24 saatlik seri: sıcaklık, rüzgâr, yağış, UV, karanlık | saat aralığı + gerekçe |
-| Sürüş, seyahat, bahçe, gün batımı fotoğraf | 4+ | — | IDEA-003 |
-
-Formüller ve eşikler Faz 1E'de bu dosyaya yazılır; her biri birim testli. Endeks çıktıları ham sağlayıcı verisini geri vermeyecek biçimde dönüştürülmüştür (katma değerli ürün).
+Tam katalog, ilkeler ve faz eşlemesi: [`05-lifestyle.md`](05-lifestyle.md). Karar: ADR-0010.
+Özet: Faz 1 günün özeti, konfor, kıyafet+şemsiye, koşu saati · Faz 2 bildirimler, çamaşır, araç yıkama, bisiklet, gün batımı, sürüş, kişiselleştirme v1 · Faz 3 güven farkındalıklı öneriler, isabet raporu, kişiselleştirme v2 · Faz 4 AQI/polen, UV, seyahat, bahçe.
+Öneri çıktıları ham sağlayıcı verisini geri vermeyecek biçimde dönüştürülmüştür (katma değerli ürün).
 
 ## C. Görsel deneyim
 | Özellik | Faz |

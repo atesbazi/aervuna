@@ -12,6 +12,6 @@ CLAUDE.md → "Oturum ritüeli"ni eksiksiz uygula:
 Çıktı (kısa):
 - Aktif faz ve son durum (2 satır)
 - Bu oturumun planı (3–6 madde, story ID'leriyle)
-- Engel veya açık soru varsa (seçenek + öneri)
+- Engel varsa ve nasıl karar verdiğin (açık soruları Âkif'e sorma; kararı ver ve kaydet)
 
 Ek odak (varsa): $ARGUMENTS
