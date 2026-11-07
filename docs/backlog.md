@@ -85,7 +85,7 @@ Durum `progress.md`'de izlenir; bu dosya kapsamı tanımlar.
 ## Fikirler (önceliklendirilmedi)
 | ID | Fikir | Kaynak |
 |---|---|---|
-| IDEA-001 | Nowcasting ve radar (Rainbow.ai / Tomorrow.io; Türkiye kapsamına bağlı) | Faz 0 dokümanı |
+| IDEA-001 | Nowcasting ve radar (Rainbow.ai / Tomorrow.io; Türkiye kapsamına bağlı). Yazışma metinleri hazır: `research/provider-outreach.md` §3–4 (web formu) | Faz 0 dokümanı |
 | IDEA-002 | Hava kalitesi ve polen (CAMS) → alerji ve dış mekân spor önerisi | Faz 0 dokümanı |
 | IDEA-003 | Seyahat karşılaştırma, bahçe/sulama, güneş koruma zamanlayıcı (Faz 4 adayı, `product/05-lifestyle.md`) | 2026-11-08 |
 | IDEA-004 | Wear OS / Apple Watch, Live Activity | 2026-11-08 sohbeti |

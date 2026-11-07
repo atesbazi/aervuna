@@ -9,8 +9,8 @@
 |---|---|---|---|---|
 | Open-Meteo | 2026-11-08 (e-posta, info@) | Bekleniyor | | |
 | Meteoblue | 2026-11-08 (e-posta, support@; satışa iletilmesi rica edildi) | Bekleniyor | | |
-| Tomorrow.io | Web formu — Âkif | | | |
-| Rainbow.ai | Web formu — Âkif | | | |
+| Tomorrow.io | Ertelendi (Faz 4, nowcasting) | | | |
+| Rainbow.ai | Ertelendi (Faz 4, nowcasting) | | | |
 | MGM | 2026-11-08 (e-posta, pazarlama@) | Bekleniyor | | |
 
 ## Yanıtlar

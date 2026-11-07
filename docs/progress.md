@@ -44,7 +44,7 @@ Simgeler: ⏳ başlamadı · 🔨 sürüyor · 🧪 testte · ✋ checkpoint bek
 
 | ID | Görev | Neden Âkif | Durum |
 |---|---|---|---|
-| WX-001 | Sağlayıcı yazışmaları. Open-Meteo, Meteoblue, MGM'ye 2026-11-08'de Gmail'den gönderildi; yanıtlar günlük takip görevince işlenir. **Kalan:** Tomorrow.io ve Rainbow.ai web formları (`research/provider-outreach.md` §3–4) | Yazışma ve sözleşme | 🔨 3/5 gönderildi |
+| WX-001 | Sağlayıcı yazışmaları. Open-Meteo, Meteoblue, MGM'ye 2026-11-08'de Gmail'den gönderildi; yanıtlar günlük takip görevince işlenir. Tomorrow.io ve Rainbow.ai ertelendi (nowcasting Faz 4; IDEA-001) | Yazışma ve sözleşme | 🔨 Gönderildi, yanıt bekleniyor |
 | WX-002 | "Aervuna" için TÜRKPATENT, EUIPO, Play, App Store araması | Marka | ✅ 2026-11-08: çakışma yok, ad tekil |
 | WX-003 | WeatherKit'i Türkiye'de test etmek (yalnız gösterim rolü) | Apple geliştirici hesabı | ⏳ |
 | WX-005 | Mac edinme (Faz 2) | Para | ⏳ |
@@ -57,6 +57,7 @@ WX-004 (CAMS kapsamı) ajana devredildi: kamuya açık dokümantasyondan kontrol
 | Tarih | Karar | Gerekçe | Kaynak |
 |---|---|---|---|
 | 2026-11-08 | Açık sorular Âkif'e sorulmaz; ajan en mantıklı/performanslı/stabil/doğru yolu seçer ve buraya yazar. Âkif'te kalan: faz onayı, para, yazışma/sözleşme/marka, geri alınamaz işler | Âkif | `CLAUDE.md` → Açık sorular ve kararlar |
+| 2026-11-08 | Tomorrow.io ve Rainbow.ai yazışması Faz 4'e ertelendi | Yalnız nowcasting için gerekli; Faz 0–3 kapsamını etkilemiyor; ikisi de e-posta yayınlamıyor (yalnız web formu) | IDEA-001 |
 | 2026-11-08 | Sağlayıcı e-postaları hazırlandı; Open-Meteo ve Meteoblue öncelikli, MGM Türkçe | WX-001'i Âkif için gönderilmeye hazır hale getirmek | `research/provider-outreach.md` |
 | 2026-11-08 | Uygulama adı **Aervuna**, repo `atesbazi/aervuna` (eski: Ufuk); marka araması temiz (WX-002) | Âkif | — |
 | 2026-11-08 | Yaşam tarzı ikinci değer ayağı; her fazda planlı: F1 v0, F2 v1 + bildirim + kişiselleştirme, F3 güven farkındalıklı + isabet raporu, F4 AQI/polen/UV/seyahat/bahçe | Âkif'in beklentisi; öneri ancak tahmin kadar iyi olduğu için doğruluğa bağlı | `product/05-lifestyle.md`, ADR-0010 |
