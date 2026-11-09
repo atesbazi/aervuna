@@ -5,7 +5,7 @@
 
 | Sağlayıcı | Ticari hava uygulaması | Paylaşılan önbellek | Arşiv / doğrulama | Türev ürün | Ham veriye ücret | Atıf | Adaptör bayrakları | Kaynak | Kontrol |
 |---|---|---|---|---|---|---|---|---|---|
-| Open-Meteo (ticari) | Evet (ücretli plan) | Evet (CC BY 4.0) | Evet (CC BY 4.0) | Evet | Serbest | CC BY: kaynak + değişiklik belirtimi | `archive_allowed=true`, `shared_cache_ttl` = yazılı yanıtla | [pricing/lisans](https://open-meteo.com/en/pricing) | 2026-11-07; yazılı yanıt bekleniyor |
+| Open-Meteo (ticari) | **Evet** (yazılı) | Evet (saklama + yeniden dağıtım serbest; süre sınırı yok) | **Evet** (yazılı: ham/işlenmiş veriyi saklama, analiz, model eğitimi) | **Evet** (yazılı; ücretli katman dahil, kısıt yok) | Serbest | Open-Meteo **ve** kullanılan modelin resmi sağlayıcısı ([licence](https://open-meteo.com/en/licence)) | `archive_allowed=true`, `shared_cache_ttl=30 dk` (tazelik kararı), atıf model bazlı | [pricing](https://open-meteo.com/en/pricing), [licence](https://open-meteo.com/en/licence), yazılı yanıt (`provider-responses.md`) | 2026-11-09 (yazılı yanıt) |
 | Open-Meteo (ücretsiz) | **Hayır** (ticari olmayan) | — | — | — | — | — | Kullanılmaz | aynı | 2026-11-07 |
 | ECMWF açık veri | Evet | Evet | Evet | Evet | Serbest | CC-BY-4.0 zorunlu, örnek metin ECMWF'de | `archive_allowed=true` | [ECMWF](https://www.ecmwf.int/node/29497) | 2026-11-07 |
 | Meteoblue | Sorulacak | Sorulacak | Sorulacak | Sorulacak | Sorulacak | Logo+link karşılığı indirim seçeneği | Yanıta kadar `archive_allowed=false`, `shared_cache_ttl=0` | [pricing](https://business.meteoblue.com/pricing) | 2026-11-07 |
@@ -17,6 +17,12 @@
 | RainViewer | **Hayır** (ücretsiz: kişisel/eğitim) | — | — | — | — | Zorunlu | Kullanılmaz (ticari anlaşma yoksa) | [API](https://rainviewer.com/api.html) | 2026-11-07 |
 | Rainbow.ai | Ücretli plan | Sorulacak | Sorulacak | Sorulacak | — | Sorulacak | — | [business](https://rainbow.ai/business) | 2026-11-07 |
 | MGM | Ücretli veri satışı | Sorulacak | Sorulacak | Sorulacak | — | Sorulacak | — | [katsayılar](https://www.mgm.gov.tr/site/urunler/katsayi.pdf) | 2026-11-07 |
+
+## Open-Meteo — yazılı yanıt özeti (2026-11-09)
+- Ticari plan tüketici hava uygulaması için uygun.
+- Ham ve işlenmiş veri ile analiz sonuçları kullanılabilir, saklanabilir, yeniden dağıtılabilir. Tek koşul atıf: Open-Meteo + resmi veri sağlayıcısı (ör. ECMWF, DWD, NOAA, Météo-France; yanıtı üreten modele göre).
+- SLA yalnız Enterprise planında; Professional planında uptime taahhüdü yok.
+- Self-host: Open-Meteo lisansı gerekmez; sunucu kodunda yaptığımız değişiklikler ve tescilli eklemeler açık kaynak ve herkese açık yayımlanmalı (repo LICENSE). Yorum (varsayım): kendi API'miz ve pipeline'ımız bu sunucunun parçası değilse kapsam dışı; self-host kararı verilirse lisans metniyle ayrıca incelenir.
 
 ## Apple WeatherKit — Attachment 8 özet (2026-11-08 okundu)
 - 1.2 Orijinal biçimdeki veriye ücret alınamaz; dönüştürülmüş katma değerli ürüne ücret alınabilir; alt lisans verilemez; dahili amaçla kullanım serbest.
