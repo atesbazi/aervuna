@@ -11,7 +11,7 @@
 | Meteoblue | 2026-11-08 (e-posta, support@; satışa iletilmesi rica edildi) | Bekleniyor | | |
 | Tomorrow.io | Ertelendi (Faz 4, nowcasting) | | | |
 | Rainbow.ai | Ertelendi (Faz 4, nowcasting) | | | |
-| MGM | 2026-11-08 (e-posta, pazarlama@) | Bekleniyor | | |
+| MGM | 2026-11-08 (e-posta, pazarlama@) | ⚠️ 2026-11-11 (e-posta, Döner Sermaye İşletmesi) | Yalnız MY-55 "İl ve İlçe Merkezleri Son Durum" (saatlik, web servis, yıllık sözleşme) önerildi; **veriler arşivlenemez, 3. kişilerle paylaşılamaz**. Fiyat, OMGİ, türev ürün ve uyarı soruları yanıtsız; ürün listesi linki e-postada yok; 2027 ürünlerinde değişiklik olacak | evet (2026-11-11) |
 
 ## Yanıtlar
 
@@ -31,4 +31,21 @@
 
 - **Adaptör bayrakları:** `archive_allowed=true` · `shared_cache_ttl=30 dk` (lisans sınırı yok; tazelik kararı, bkz. progress.md → Kararlar 2026-11-09) · `attribution="Weather data by Open-Meteo.com (CC BY 4.0)" + kullanılan modelin resmi sağlayıcısı`
 - **Etkilenen ADR:** ADR-0002 (Open-Meteo ayağının yazılı teyidi geldi; karar değişmedi). Self-host yükümlülüğü ileride ayrı ADR konusu.
+- **license-notes.md güncellendi:** evet
+
+### MGM — 2026-11-11
+- **Gönderen rolü:** Meteoroloji Genel Müdürlüğü Döner Sermaye İşletmesi (talep pazarlama@ adresinden ilgili birime iletilmiş)
+- **Kanal:** e-posta (gönderdiğimiz 2026-11-08 e-postasına yanıt)
+
+| Soru | Yanıt (özet) | Yazılı mı? | Sonuç |
+|---|---|---|---|
+| 1. OMGİ gerçek zamanlı/saatlik veriye API ile erişim | OMGİ'den söz edilmedi. Önerilen ürün **MY-55 İl ve İlçe Merkezleri Son Durum**: il merkezleri ve belirli ilçelerin saatlik son durumu, web servis, **yıllık sözleşme** | Evet | ⚠️ Yalnız il/ilçe merkezi son durum; OMGİ ağı yanıtsız |
+| 2a. İç kullanım (doğrulama, model eğitimi) | Doğrudan yanıt yok; genel koşul "veriler arşivlenemez" → doğrulama ve model eğitimi için gereken saklama yapılamaz | Evet (genel koşul) | ❌ |
+| 2b. Kullanıcıya gösterim | Doğrudan yanıt yok; genel koşul "3. kişiler ile paylaşılamaz". En güvenli yorum: son kullanıcıya gösterim de yeniden dağıtımdır | Evet (genel koşul) | ❌ (en güvenli yorum) |
+| 3. Arşiv ve türev ürün (düzeltilmiş tahmin, öneri) | "Veriler arşivlenemez." Türev ürün ayrıca anılmadı | Evet | ❌ Arşiv yasak; türev belirsiz |
+| 4. Resmi uyarıların kaynak gösterilerek yayımlanması | Yanıtsız | — | ⚠️ Belirsiz |
+| 5. Yıllık fiyat | Tutar yok; ürün listesine link verildiği yazıyor ama e-postada link/ek yok. "2027 ürünlerimizde değişiklikler olacaktır" | Kısmen | ⚠️ Fiyat bilinmiyor |
+
+- **Adaptör bayrakları:** `archive_allowed=false` · `shared_cache_ttl=0` · `attribution="Meteoroloji Genel Müdürlüğü"` (kullanılırsa). Adaptör yazılmaz (bkz. `progress.md` → Kararlar 2026-11-11).
+- **Etkilenen ADR:** ADR-0002 değişmez (MGM ana kaynak değil; `plan.md` "izin alınırsa MGM"). Doğrulama ve bias düzeltme METAR + ECMWF açık veri ile sürer.
 - **license-notes.md güncellendi:** evet

@@ -16,13 +16,18 @@
 | NOAA AviationWeather (METAR) | Evet (kamu verisi) | Evet | Evet (son 30 gün API; arşivi biz tutarız) | Evet | — | Kaynak belirtilir | 100 istek/dk, özel User-Agent | [Data API](https://aviationweather.gov/data/api/) | 2026-11-08 |
 | RainViewer | **Hayır** (ücretsiz: kişisel/eğitim) | — | — | — | — | Zorunlu | Kullanılmaz (ticari anlaşma yoksa) | [API](https://rainviewer.com/api.html) | 2026-11-07 |
 | Rainbow.ai | Ücretli plan | Sorulacak | Sorulacak | Sorulacak | — | Sorulacak | — | [business](https://rainbow.ai/business) | 2026-11-07 |
-| MGM | Ücretli veri satışı | Sorulacak | Sorulacak | Sorulacak | — | Sorulacak | — | [katsayılar](https://www.mgm.gov.tr/site/urunler/katsayi.pdf) | 2026-11-07 |
+| MGM (MY-55 web servis) | Ücretli, yıllık sözleşme; **3. kişilerle paylaşılamaz** (yazılı) → son kullanıcıya gösterim yok (en güvenli yorum) | **Hayır** | **Hayır** (yazılı: "veriler arşivlenemez") | Belirsiz → yok sayılır | Ücretli (tutar bilinmiyor) | Sorulmadı/yanıtsız | `archive_allowed=false`, `shared_cache_ttl=0`; adaptör yazılmaz | [katsayılar](https://www.mgm.gov.tr/site/urunler/katsayi.pdf), yazılı yanıt (`provider-responses.md`) | 2026-11-11 (yazılı yanıt) |
 
 ## Open-Meteo — yazılı yanıt özeti (2026-11-09)
 - Ticari plan tüketici hava uygulaması için uygun.
 - Ham ve işlenmiş veri ile analiz sonuçları kullanılabilir, saklanabilir, yeniden dağıtılabilir. Tek koşul atıf: Open-Meteo + resmi veri sağlayıcısı (ör. ECMWF, DWD, NOAA, Météo-France; yanıtı üreten modele göre).
 - SLA yalnız Enterprise planında; Professional planında uptime taahhüdü yok.
 - Self-host: Open-Meteo lisansı gerekmez; sunucu kodunda yaptığımız değişiklikler ve tescilli eklemeler açık kaynak ve herkese açık yayımlanmalı (repo LICENSE). Yorum (varsayım): kendi API'miz ve pipeline'ımız bu sunucunun parçası değilse kapsam dışı; self-host kararı verilirse lisans metniyle ayrıca incelenir.
+
+## MGM — yazılı yanıt özeti (2026-11-11)
+- Önerilen ürün yalnız MY-55 İl ve İlçe Merkezleri Son Durum (saatlik, web servis, yıllık sözleşme). OMGİ ağına erişim anılmadı.
+- Koşullar: veriler **arşivlenemez** ve **3. kişilerle paylaşılamaz**. Doğrulama/model eğitimi (saklama gerektirir) ve son kullanıcıya gösterim bu koşullarla yapılamaz (en güvenli yorum).
+- Fiyat, türev ürün ve resmi uyarıların yayımı yanıtsız. 2027'de ürünlerde değişiklik olacağı belirtildi.
 
 ## Apple WeatherKit — Attachment 8 özet (2026-11-08 okundu)
 - 1.2 Orijinal biçimdeki veriye ücret alınamaz; dönüştürülmüş katma değerli ürüne ücret alınabilir; alt lisans verilemez; dahili amaçla kullanım serbest.

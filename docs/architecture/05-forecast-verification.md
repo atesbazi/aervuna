@@ -5,7 +5,7 @@
 ## Gözlem kaynağı
 - **METAR** (NOAA AviationWeather Data API): Türkiye havalimanları. API son 30 günü verir; arşivi biz tutarız.
 - Sınırlama: Havalimanı noktası şehrin tamamını temsil etmez (kıyı, rakım, kentsel ısı adası). Raporlarda istasyon bazında verilir; şehir geneline genelleme yapılmaz.
-- İleride: MGM istasyonları (lisans izin verirse).
+- MGM istasyonları: 2026-11-11 yazılı yanıtla arşiv ve 3. kişi paylaşımı yasak (MY-55) → kullanılmaz; lisans değişirse yeniden değerlendirilir (`research/license-notes.md`).
 
 ## Pilot istasyonlar
 Türkiye: LTAC (Ankara Esenboğa), LTFM (İstanbul), LTBJ (İzmir), LTAI (Antalya). Global: EGLL (Londra Heathrow), EDDF (Frankfurt), KJFK (New York JFK), RJTT (Tokyo Haneda). Faz 0 sonunda tüm aktif LTxx; global liste pazar sırasına göre büyür.

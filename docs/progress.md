@@ -11,7 +11,7 @@
 | Faz durumu | 🔨 İskelet, şema, istasyon kataloğu ve METAR arşivleyici kodda; 7 günlük çalışma başlamadı |
 | Son tamamlanan story | WX-010, WX-011 (2026-11-08) |
 | Sıradaki adım | WX-013 ECMWF IFS anlık görüntü → WX-014 doğrulama raporu v0 iskeleti → WX-018 kararlılık metriği |
-| Engeller | Open-Meteo yazılı yanıtı geldi (2026-11-09, lisans ✅); WX-016 ticari anahtar alımını bekliyor (ÜS-009). Meteoblue ve MGM yanıtı yok. 7 günlük METAR/ECMWF sayacı arşivleyici sürekli çalışan bir makinede başlatılınca başlar (ÜS-007) |
+| Engeller | Open-Meteo yazılı yanıtı geldi (2026-11-09, lisans ✅); WX-016 ticari anahtar alımını bekliyor (ÜS-009). MGM yanıtladı (2026-11-11): MY-55 arşivlenemez/paylaşılamaz → kullanılmaz. Meteoblue yanıtı yok. 7 günlük METAR/ECMWF sayacı arşivleyici sürekli çalışan bir makinede başlatılınca başlar (ÜS-007) |
 | Çalışma biçimi | Saatsiz scheduled task, Âkif elle başlatır. CI yok. Açık sorular ajan tarafından karara bağlanır |
 | Son checkpoint onayı | — |
 
@@ -44,7 +44,7 @@ Simgeler: ⏳ başlamadı · 🔨 sürüyor · 🧪 testte · ✋ checkpoint bek
 
 | ID | Görev | Neden Âkif | Durum |
 |---|---|---|---|
-| WX-001 | Sağlayıcı yazışmaları. Open-Meteo, Meteoblue, MGM'ye 2026-11-08'de Gmail'den gönderildi; yanıtlar günlük takip görevince işlenir. Tomorrow.io ve Rainbow.ai ertelendi (nowcasting Faz 4; IDEA-001) | Yazışma ve sözleşme | 🔨 Open-Meteo ✅ yanıtladı (2026-11-09, `research/provider-responses.md`); Meteoblue ve MGM bekleniyor |
+| WX-001 | Sağlayıcı yazışmaları. Open-Meteo, Meteoblue, MGM'ye 2026-11-08'de Gmail'den gönderildi; yanıtlar günlük takip görevince işlenir. Tomorrow.io ve Rainbow.ai ertelendi (nowcasting Faz 4; IDEA-001) | Yazışma ve sözleşme | 🔨 Open-Meteo ✅ yanıtladı (2026-11-09); MGM ⚠️ yanıtladı (2026-11-11: yalnız MY-55, arşiv ve 3. kişi paylaşımı yasak → kullanılmaz; bkz. ÜS-010); Meteoblue bekleniyor. Ayrıntı `research/provider-responses.md` |
 | WX-002 | "Aervuna" için TÜRKPATENT, EUIPO, Play, App Store araması | Marka | ✅ 2026-11-08: çakışma yok, ad tekil |
 | WX-003 | WeatherKit'i Türkiye'de test etmek (yalnız gösterim rolü) | Apple geliştirici hesabı | ⏳ |
 | WX-005 | Mac edinme (Faz 2) | Para | ⏳ |
@@ -52,6 +52,7 @@ Simgeler: ⏳ başlamadı · 🔨 sürüyor · 🧪 testte · ✋ checkpoint bek
 | ÜS-007 | METAR arşivleyiciyi sürekli açık bir makinede başlatmak: `infra/README.md` komutları (db → migrate → metar-archiver). 7 günlük WX-012/WX-013 sayacı bununla başlar; ilk `migrate` çıktısında WARNING olmamalı (TimescaleDB). Zamanlanmış oturumların kalıcı sunucusu yok | Makine/sunucu (Faz 0 maliyeti "Yerel") | ⏳ |
 | ÜS-008 | (İsteğe bağlı) Claude ayarları → Capabilities'te `aviationweather.gov`, `data.ecmwf.int`, `registry-1.docker.io`, `ghcr.io` alanlarına izin: oturumlar canlı yanıtla doğrulama ve compose imajlarını deneyebilir. Bu oturumda üçü de proxy tarafından reddedildi | Hesap ayarı | ⏳ |
 | ÜS-009 | Open-Meteo **Professional API** planını satın almak ve API anahtarını ortam değişkeni olarak sağlamak (repoya değil). Yazılı yanıt: 4–5M çağrı/ay bu plan; fazlası 10M'lik ek Professional planlar, hacim indirimi otomatik; SLA yalnız Enterprise. WX-016'yı açar | Para + hesap | ⏳ |
+| ÜS-010 | (İsteğe bağlı) MGM'ye takip: yanıtta anılan ürün listesi linki e-postada yok; 2027 ürün değişiklikleri, OMGİ erişimi, resmi uyarıların kaynak gösterilerek yayımı ve yalnız iç doğrulama için arşivli bir ürün/lisans olup olmadığı sorulabilir. Yanıt gelmezse plan değişmez (MGM'siz) | Yazışma | ⏳ |
 | — | Faz checkpoint onayları ("Faz N onaylandı") | Faz kapısı | — |
 
 WX-004 (CAMS kapsamı) ajana devredildi: kamuya açık dokümantasyondan kontrol edilir.
@@ -59,6 +60,8 @@ WX-004 (CAMS kapsamı) ajana devredildi: kamuya açık dokümantasyondan kontrol
 ## Kararlar
 | Tarih | Karar | Gerekçe | Kaynak |
 |---|---|---|---|
+| 2026-11-11 | MGM MY-55 kullanılmaz; MGM adaptörü yazılmaz. Doğrulama ve bias düzeltme METAR + ECMWF açık veriyle sürer; ADR-0002 değişmez. Lisans yeniden açılırsa yeni karar | Yazılı yanıt: veriler arşivlenemez ve 3. kişilerle paylaşılamaz. Doğrulama/model eğitimi saklama gerektirir (AGENTS §2.5); gösterim için en güvenli yorum: son kullanıcı 3. kişidir (CLAUDE.md lisans belirsizliği kuralı). MGM ADR-0002'de ana kaynak değil (`plan.md`: "izin alınırsa MGM") | `research/provider-responses.md` → MGM 2026-11-11 |
+| 2026-11-11 | MGM uyarılarının uygulamada yayımı belirsiz kabul edilir; resmi uyarı kaynağı olarak MGM kullanılmaz | Soru 4 yanıtsız; en güvenli yorum (izin yok) | aynı |
 | 2026-11-09 | ADR-0002'nin Open-Meteo ayağı yazılı teyit aldı; karar aynen geçerli, ADR değişmez. Meteoblue/MGM teyidi bekleniyor | Yazılı yanıt: ticari plan uygun; saklama, arşiv, türev ve yeniden dağıtım serbest; tek koşul atıf | `research/provider-responses.md` → Open-Meteo 2026-11-09 |
 | 2026-11-09 | Open-Meteo adaptör bayrakları: `archive_allowed=true`, `shared_cache_ttl=30 dk` | Lisans süre sınırı koymuyor; süre tazelik kararı. 30 dk, sağlayıcılara bildirdiğimiz çağrı tahmininin (hücre başına 30 dk yenileme) temeli ve doğruluk önceliğine uygun. Varsayım: tek sabit, ölçümle değiştirilebilir | `research/license-notes.md` |
 | 2026-11-09 | Atıf model bazlı: yanıtta Open-Meteo **ve** tahmini üreten modelin resmi sağlayıcısı gösterilir; `attribution` alanı sabit metin değil, kullanılan modele göre üretilir (WX-021) | Open-Meteo'nun tek lisans koşulu; `04-api-contracts.md` örneği yalnız Open-Meteo'yu anıyor, WX-021'de genişletilir | Open-Meteo yanıtı, [licence](https://open-meteo.com/en/licence) |
